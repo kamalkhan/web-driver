@@ -1,13 +1,15 @@
 {
     "name": "bhittani/web-driver",
     "license": "MIT",
-    "description": "Run a web driver programmatically.",
+    "description": "A convenience wrapper around facebook's php-webdriver",
     "keywords": [
         "web",
         "driver",
-        "scripting",
-        "programmatic",
-        "process"
+        "process",
+        "testing",
+        "chrome",
+        "phantomjs",
+        "php-webdriver"
     ],
     "homepage": "https://github.com/kamalkhan/web-driver",
     "authors": [
