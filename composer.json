@@ -1,0 +1,72 @@
+{
+    "name": "bhittani/web-driver",
+    "license": "MIT",
+    "description": "Run a web driver programmatically.",
+    "keywords": [
+        "web",
+        "driver",
+        "scripting",
+        "programmatic",
+        "process"
+    ],
+    "homepage": "https://github.com/kamalkhan/web-driver",
+    "authors": [
+        {
+            "role": "developer",
+            "name": "Kamal Khan",
+            "email": "shout@bhittani.com",
+            "homepage": "http://bhittani.com"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/kamalkhan/web-driver",
+        "issues": "https://github.com/kamalkhan/web-driver/issues"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bhittani\\WebDriver\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bhittani\\WebDriver\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "platform": {
+            "php": "5.6"
+        }
+    },
+    "require": {
+        "php": ">=5.6",
+        "php-webdriver/webdriver": "^1.8",
+        "symfony/process": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpunit/phpunit": "<8"
+    },
+    "scripts": {
+        "test": "phpunit --colors=always",
+        "cs-fix": "php-cs-fixer fix --using-cache=no",
+        "cs-check": "php-cs-fixer fix --dry-run --using-cache=no"
+    },
+    "repositories": [
+        {
+            "packagist": false
+        },
+        {
+            "type": "composer",
+            "url": "https://packagist.org"
+        }
+    ]
+}
