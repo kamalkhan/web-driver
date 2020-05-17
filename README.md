@@ -31,7 +31,7 @@ $ composer require bhittani/web-driver --prefer-dist
 
 ## Usage
 
-This package is conveniently wraps the [Facebook's PHP Web Driver](https://github.com/php-webdriver/php-webdriver) and by default offers drivers for chrome and phantomjs.
+This package conveniently wraps the [Facebook's PHP Web Driver](https://github.com/php-webdriver/php-webdriver) and by default offers drivers for chrome and phantomjs.
 
 ### Chrome Web Driver
 
