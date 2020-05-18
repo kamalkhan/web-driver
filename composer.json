@@ -24,6 +24,10 @@
         "source": "https://github.com/kamalkhan/web-driver",
         "issues": "https://github.com/kamalkhan/web-driver/issues"
     },
+    "bin": [
+        "bin/install-chrome-driver",
+        "bin/install-phantomjs-driver"
+    ],
     "autoload": {
         "psr-4": {
             "Bhittani\\WebDriver\\": "src"
@@ -50,7 +54,9 @@
     },
     "require": {
         "php": ">=5.6",
+        "bhittani/download": "^0.1.1",
         "php-webdriver/webdriver": "^1.8",
+        "symfony/console": "*",
         "symfony/process": "*"
     },
     "require-dev": {

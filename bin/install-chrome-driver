@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use Bhittani\WebDriver\Console\InstallChromeCommand;
+
+foreach ([
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php',
+] as $file) {
+    if (file_exists($file)) {
+        require_once $file;
+        break;
+    }
+}
+
+$app = new Application('Install Chrome Driver');
+
+$app->add(new InstallChromeCommand);
+
+$app->setDefaultCommand('install', true);
+
+$app->run();
