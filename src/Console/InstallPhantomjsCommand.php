@@ -20,7 +20,7 @@ class InstallPhantomjsCommand extends InstallDriverCommand
      *
      * @var string
      */
-    protected $downloadUrl = 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-%s-%s.zip';
+    protected $downloadUrl = 'https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-%s-%s%s';
 
     /**
      * The latest version available.
@@ -38,6 +38,17 @@ class InstallPhantomjsCommand extends InstallDriverCommand
         'linux' => 'linux-x86_64',
         'mac' => 'macosx',
         'win' => 'windows',
+    ];
+
+    /**
+     * Download extensions for the available operating systems.
+     *
+     * @var array
+     */
+    protected $extensions = [
+        'linux' => '.tar.bz2',
+        'mac' => '.zip',
+        'win' => '.zip',
     ];
 
     /** {@inheritdoc} */
@@ -61,15 +72,16 @@ class InstallPhantomjsCommand extends InstallDriverCommand
         $version = $this->getVersion();
         $os = static::getCurrentOS();
         $slug = $this->slugs[$os];
-        $url = sprintf($this->downloadUrl, $version, $slug);
+        $extension = $this->extensions[$os];
+        $url = sprintf($this->downloadUrl, $version, $slug, $extension);
         $destination = $this->getDestination();
         $compiledDestination = $this->getCompiledDestination();
 
-        static::download($url, $destination, $this->output);
+        $target = static::download($url, $destination, $this->output);
 
         $name = $this->getDriverName().static::getOSExtension();
         $tmpName = '_'.$name;
-        copy($destination.'/bin/'.$name, $this->destination.'/'.$tmpName);
+        copy($target.'/bin/'.$name, $this->destination.'/'.$tmpName);
         static::rmdir($destination);
         rename($this->destination.'/'.$tmpName, $compiledDestination);
 
