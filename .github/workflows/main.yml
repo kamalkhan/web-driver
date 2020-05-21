@@ -24,6 +24,8 @@ jobs:
           coverage: none
       - name: Require composer dependencies
         run: composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader --ignore-platform-reqs
+      - name: Install browser drivers
+        run: composer install-drivers
       - name: Check coding standards
         run: composer cs-check
       - name: Test using PHPUnit
