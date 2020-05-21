@@ -4,12 +4,15 @@ Run and/or control a web driver programmatically.
 
 - [Requirements](#requirements)
 - [Install](#install)
+  - [Install chrome driver](#install-chrome-driver)
+  - [Install phantomjs driver](#install-phantomjs-driver)
 - [Usage](#usage)
   - [Chrome Web Driver](#chrome-web-driver)
   - [Phantomjs Web Driver](#phantomjs-web-driver)
 - [API](#api)
   - [Example](#example)
 - [Advanced](#advanced)
+  - [TODO](#todo)
 - [Changelog](#changelog)
 - [Testing](#testing)
 - [Contributing](#contributing)
@@ -29,28 +32,44 @@ You may install this package using [composer][link-composer].
 $ composer require bhittani/web-driver --prefer-dist
 ```
 
+### Install chrome driver
+
+```shell
+$ vendor/bin/install-chrome-driver
+```
+
+### Install phantomjs driver
+
+```shell
+$ vendor/bin/install-phantomjs-driver
+```
+
 ## Usage
 
 This package conveniently wraps the [Facebook's PHP Web Driver](https://github.com/php-webdriver/php-webdriver) and by default offers drivers for chrome and phantomjs.
 
 ### Chrome Web Driver
 
+First ensure you have installed the [chrome driver](#install-chrome-driver).
+
 ```php
 <?php
 
-use Bhittani\WebDriver\Chrome as ChromeDriver;
+use Bhittani\WebDriver\Chrome;
 
-$driver = ChromeDriver::make('/path/to/chrome/driver/binary');
+$driver = Chrome::make();
 ```
 
 ### Phantomjs Web Driver
 
+First ensure you have installed the [phantomjs driver](#install-phantomjs-driver).
+
 ```php
 <?php
 
-use Bhittani\WebDriver\Phantomjs as PhantomjsDriver;
+use Bhittani\WebDriver\Phantomjs;
 
-$driver = PhantomjsDriver::make('/path/to/phantomjs/driver/binary');
+$driver = Phantomjs::make();
 ```
 
 ## API
@@ -69,9 +88,12 @@ $googleDotCom->getTitle(); // 'Google'
 
 ## Advanced
 
-[ ] Document the usage of process.
-[ ] Document the usage of custom ports.
-[ ] Document the usage of payload (chrome)
+### TODO
+
+- [ ] Document the usage of process.
+- [ ] Document the usage of custom ports.
+- [ ] Document the usage of payload (chrome)
+
 
 ## Changelog
 
@@ -79,14 +101,16 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed.
 
 ## Testing
 
-```sh
-git clone https://github.com/kamalkhan/web-driver
+```shell
+$ git clone https://github.com/kamalkhan/web-driver
 
-cd web-driver
+$ cd web-driver
 
-composer install
+$ composer install
 
-composer test
+$ composer install-drivers
+
+$ composer test
 ```
 
 ## Contributing
