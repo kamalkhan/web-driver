@@ -67,8 +67,9 @@
         "test": "phpunit --colors=always",
         "cs-fix": "php-cs-fixer fix --using-cache=no",
         "cs-check": "php-cs-fixer fix --dry-run --using-cache=no",
-        "install-chrome-driver": "install-chrome-driver",
-        "install-phantomjs-driver": "install-phantomjs-driver"
+        "install-chrome-driver": "bin/install-chrome-driver",
+        "install-phantomjs-driver": "bin/install-phantomjs-driver",
+        "install-drivers": "bin/install-chrome-driver -q & bin/install-phantomjs-driver -q"
     },
     "repositories": [
         {
