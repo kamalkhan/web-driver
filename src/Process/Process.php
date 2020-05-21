@@ -11,10 +11,20 @@
 
 namespace Bhittani\WebDriver\Process;
 
+use Bhittani\WebDriver\Console\CurrentOS;
 use Symfony\Component\Process\Process as SymfonyProcess;
 
 abstract class Process implements Contract
 {
+    use CurrentOS;
+
+    /**
+     * Driver binaries path.
+     *
+     * @var string
+     */
+    protected static $drivers = __DIR__.'/../../drivers';
+
     /**
      * Driver binary path.
      *
@@ -46,8 +56,8 @@ abstract class Process implements Contract
     /**
      * Construct the instance.
      *
-     * @param string $binary
-     * @param int    $port
+     * @param string   $binary
+     * @param int|null $port
      */
     public function __construct($binary, $port = null)
     {
@@ -64,6 +74,29 @@ abstract class Process implements Contract
     }
 
     /**
+     * Make the process.
+     *
+     * @param int|null $port
+     */
+    public static function make($port = null)
+    {
+        $process = new static(null, $port);
+        $process->binary($process->getBinary() ?: static::getDefaultBinary());
+
+        return $process;
+    }
+
+    /**
+     * Get the driver binary path.
+     *
+     * @return string
+     */
+    public function getBinary()
+    {
+        return (string) $this->binary;
+    }
+
+    /**
      * Set the driver binary.
      *
      * @param string $binary
@@ -72,7 +105,7 @@ abstract class Process implements Contract
      */
     public function binary($binary)
     {
-        $this->binary = realpath($binary);
+        $this->binary = $binary;
 
         return $this;
     }
@@ -98,6 +131,10 @@ abstract class Process implements Contract
      */
     public function start($wait = null)
     {
+        if (! is_file($this->binary)) {
+            throw DriverNotFoundException::make(static::getName());
+        }
+
         if (! $this->isRunning()) {
             $this->process = $this->makeProcess();
 
@@ -129,6 +166,16 @@ abstract class Process implements Contract
     public function getUrl()
     {
         return $this->url ?: rtrim('http://localhost:'.$this->port, ':');
+    }
+
+    protected static function getName()
+    {
+        return strtolower(basename(str_replace('\\', '/', static::class)));
+    }
+
+    protected static function getDefaultBinary()
+    {
+        return rtrim(static::$drivers, '\/').'/'.static::getName().static::getOSExtension();
     }
 
     /**

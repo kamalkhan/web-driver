@@ -17,7 +17,7 @@ class Chrome extends Process
     protected function getCommand()
     {
         return [
-            $this->binary,
+            realpath($this->binary),
             '--port='.$this->port,
         ];
     }

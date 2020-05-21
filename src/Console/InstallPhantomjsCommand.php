@@ -59,17 +59,21 @@ class InstallPhantomjsCommand extends InstallDriverCommand
     protected function handle()
     {
         $version = $this->getVersion();
-        $currentOS = $this->getCurrentOS();
-        $slug = $this->slugs[$currentOS];
+        $os = static::getCurrentOS();
+        $slug = $this->slugs[$os];
         $url = sprintf($this->downloadUrl, $version, $slug);
         $destination = $this->getDestination();
         $compiledDestination = $this->getCompiledDestination();
 
-        $this->download($url, $destination);
+        static::download($url, $destination, $this->output);
 
-        copy($destination.'/bin/phantomjs', $this->destination.'/_phantomjs');
-        $this->rmdir($destination);
-        rename($this->destination.'/_phantomjs', $compiledDestination);
+        $name = $this->getDriverName().static::getOSExtension();
+        $tmpName = '_'.$name;
+        copy($destination.'/bin/'.$name, $this->destination.'/'.$tmpName);
+        static::rmdir($destination);
+        rename($this->destination.'/'.$tmpName, $compiledDestination);
+
+        chmod($compiledDestination, 0777);
 
         $this->output->writeln('');
 

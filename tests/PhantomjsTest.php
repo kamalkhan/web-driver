@@ -4,10 +4,7 @@ namespace Bhittani\WebDriver;
 
 class PhantomjsTest extends TestCase
 {
-    function makeDriver()
-    {
-        return Phantomjs::make(__DIR__.'/fixtures/phantomjs');
-    }
+    static $driverClass = Phantomjs::class;
 
     /** @test */
     function it_implements_the_contract()

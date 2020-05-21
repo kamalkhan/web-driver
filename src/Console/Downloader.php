@@ -13,6 +13,7 @@ namespace Bhittani\WebDriver\Console;
 
 use Bhittani\Download\Zip as ZipDownloader;
 use Bhittani\Download\Progress\Standard as Progress;
+use Symfony\Component\Console\Output\OutputInterface;
 
 trait Downloader
 {
@@ -22,24 +23,25 @@ trait Downloader
      * @param string $url
      * @param string $destination
      */
-    protected function download($url, $destination)
+    protected static function download($url, $destination, OutputInterface $output = null)
     {
         if (! is_dir($dir = dirname($destination))) {
             mkdir($dir, 0777, true);
         }
 
         if (is_dir($destination)) {
-            $this->rmdir($destination);
+            static::rmdir($destination);
         }
 
         if (file_exists($destination)) {
             unlink($destination);
         }
 
-        $zip = (new ZipDownloader($url))
-            ->callback(new Progress(function ($progress) {
-                $this->output->write($progress);
-            }));
+        $progress = $output ? new Progress(function ($str) use ($output) {
+            $output->write($str);
+        }) : new Progress;
+
+        $zip = (new ZipDownloader($url))->callback($progress);
 
         $zip->download($destination);
     }
@@ -49,12 +51,12 @@ trait Downloader
      *
      * @param string $path
      */
-    protected function rmdir($path)
+    protected static function rmdir($path)
     {
         $files = array_diff(scandir($path), ['.', '..']);
 
         foreach ($files as $file) {
-            is_dir($p = "{$path}/{$file}") ? $this->rmdir($p) : unlink($p);
+            is_dir($p = "{$path}/{$file}") ? static::rmdir($p) : unlink($p);
         }
 
         return rmdir($path);

@@ -104,12 +104,14 @@ class InstallChromeCommand extends InstallDriverCommand
     protected function handle()
     {
         $version = $this->getVersion();
-        $currentOS = $this->getCurrentOS();
-        $slug = $this->slugs[$currentOS];
+        $os = $this->getCurrentOS();
+        $slug = $this->slugs[$os];
         $url = sprintf($this->downloadUrl, $version, $slug);
-        $destination = $this->getCompiledDestination();
+        $compiledDestination = $this->getCompiledDestination();
 
-        $this->download($url, $destination);
+        static::download($url, $compiledDestination, $this->output);
+
+        chmod($compiledDestination, 0777);
 
         $this->output->writeln('');
 

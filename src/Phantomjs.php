@@ -27,7 +27,7 @@ class Phantomjs extends Driver
     /** {@inheritdoc} */
     protected static function makeProcess($binary)
     {
-        return new Process($binary);
+        return $binary ? new Process($binary) : Process::make();
     }
 
     /** {@inheritdoc} */

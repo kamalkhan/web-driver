@@ -18,7 +18,7 @@ trait CurrentOS
      *
      * @return string
      */
-    protected function getCurrentOS()
+    protected static function getCurrentOS()
     {
         if (
             PHP_OS === 'WINNT'
@@ -28,5 +28,15 @@ trait CurrentOS
         }
 
         return PHP_OS === 'Darwin' ? 'mac' : 'linux';
+    }
+
+    /**
+     * Get the OS extension.
+     *
+     * @return string
+     */
+    protected static function getOSExtension()
+    {
+        return static::getCurrentOS() == 'win' ? '.exe' : '';
     }
 }

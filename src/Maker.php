@@ -24,7 +24,7 @@ trait Maker
      *
      * @var ProcessContract
      */
-    protected static $process;
+    public static $process;
 
     /**
      * Make the remote web driver.

@@ -36,23 +36,7 @@ abstract class InstallDriverCommand extends Command
      */
     protected function getCompiledDestination()
     {
-        return $this->getDestination().$this->getDriverExtension();
-    }
-
-    /**
-     * Get the destination driver extension.
-     *
-     * @return string
-     */
-    protected function getDriverExtension()
-    {
-        $os = $this->getCurrentOS();
-
-        if ($os == 'win') {
-            return '.exe';
-        }
-
-        return '';
+        return $this->getDestination().static::getOSExtension();
     }
 
     /**

@@ -6,9 +6,19 @@ use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
 abstract class TestCase extends PHPUnitTestCase
 {
+    static $driverClass;
+
     var $driver;
 
-    abstract function makeDriver();
+    /** @afterClass */
+    static function stopProcess()
+    {
+        $class = static::$driverClass;
+
+        if ($process = $class::$process) {
+            $process->stop();
+        }
+    }
 
     function setUp()
     {
@@ -18,5 +28,12 @@ abstract class TestCase extends PHPUnitTestCase
     function tearDown()
     {
         $this->driver->quit();
+    }
+
+    function makeDriver()
+    {
+        $class = static::$driverClass;
+
+        return $class::make();
     }
 }

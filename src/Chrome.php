@@ -28,7 +28,7 @@ class Chrome extends Driver
     /** {@inheritdoc} */
     protected static function makeProcess($binary)
     {
-        return new Process($binary);
+        return $binary ? new Process($binary) : Process::make();
     }
 
     /** {@inheritdoc} */
@@ -41,7 +41,7 @@ class Chrome extends Driver
         ]));
 
         return DesiredCapabilities::chrome()->setCapability(
-            ChromeOptions::CAPABILITY_W3C,
+            ChromeOptions::CAPABILITY,
             $options
         );
     }

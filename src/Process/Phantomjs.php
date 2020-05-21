@@ -17,7 +17,7 @@ class Phantomjs extends Process
     protected function getCommand()
     {
         return [
-            $this->binary,
+            realpath($this->binary),
             '--webdriver=localhost:'.$this->port,
         ];
     }
