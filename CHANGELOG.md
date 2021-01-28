@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.4.0] - 2021-01-28
+
+## Fixed
+- Chrome and Phatomjs browsers can now run simultaneosly due to separate default ports.
+
 ## [0.3.0] - 2021-01-28
 
 ### Fixed
