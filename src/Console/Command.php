@@ -36,7 +36,9 @@ abstract class Command extends SymfonyCommand
         $this->input = $input;
         $this->output = $output;
 
-        return $this->handle();
+        $exitCode = $this->handle();
+
+        return is_null($exitCode) ? 0 : $exitCode;
     }
 
     protected function call($command, $input = [], $silent = false)
