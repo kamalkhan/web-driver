@@ -17,8 +17,6 @@ class DriverNotFoundException extends RuntimeException
 {
     public static function make($name)
     {
-        return new static(
-            "The binary for the {$name} driver was not found. Try running `vendor/bin/install-{$name}-driver`.",
-        );
+        return new static("The binary for the '{$name}' driver was not found. Try running 'vendor/bin/install-{$name}-driver'.");
     }
 }
