@@ -14,6 +14,9 @@ namespace Bhittani\WebDriver\Process;
 class Phantomjs extends Process
 {
     /** {@inheritdoc} */
+    protected $port = 9516;
+
+    /** {@inheritdoc} */
     protected function getCommand()
     {
         return [

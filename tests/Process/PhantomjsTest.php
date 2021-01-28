@@ -34,6 +34,6 @@ class PhantomjsTest extends TestCase
     {
         $url = $this->process->getUrl();
 
-        $this->assertEquals('http://localhost:9515', $url);
+        $this->assertEquals('http://localhost:9516', $url);
     }
 }
