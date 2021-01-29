@@ -37,7 +37,7 @@ trait Maker
     public static function make($processOrBinary = null, $payload = [])
     {
         if ($processOrBinary instanceof ProcessContract) {
-            if (static::$process) {
+            if (static::$process && static::$process !== $processOrBinary) {
                 static::$process->stop();
             }
 
